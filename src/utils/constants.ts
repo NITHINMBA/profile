@@ -1,5 +1,5 @@
 export const personalInfo = {
-  name: "NITHIYANANTHAN M",
+  name: "NITHIN M",
   title: "Business Analyst | AI-Enthuisast",
   tagline: "Transforming business requirements into innovative solutions through data-driven insights and strategic analysis",
   email: "mcnithin99@gmail.com",
