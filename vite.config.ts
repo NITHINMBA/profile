@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/test/', // This should match your repo name
+  base: '/profile/',
   build: {
-    outDir: 'docs'
+    outDir: 'dist'
   }
-});
+})

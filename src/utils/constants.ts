@@ -5,8 +5,8 @@ export const personalInfo = {
   email: "mcnithin99@gmail.com",
   phone: "+91 9788546486",
   location: "Chennai, India",
-  linkedin: "https://linkedin.com/in/nithiyananthan-m",
-  profileImage: "https://github.com/NITHINMBA/test/blob/main/docs/WhatsApp%20Image%202025-06-12%20at%2012.11.35%20PM.jpeg?raw=true"
+  linkedin: "https://linkedin.com/in/nithinmc",
+  profileImage: "https://github.com/NITHINMBA/profile/blob/main/dist/assets/Photo.jpg?raw=true"
 };
 
 export const aboutInfo = {
