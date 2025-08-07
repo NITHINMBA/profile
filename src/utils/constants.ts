@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "NITHIN M",
   title: "Business Analyst | AI-Enthuisast",
-  tagline: "test-6777-- Transforming business requirements into innovative solutions through data-driven insights and strategic analysis",
+  tagline: "Transforming business requirements into innovative solutions through data-driven insights and strategic analysis",
   email: "mcnithin99@gmail.com",
   phone: "+91 9788546486",
   location: "Chennai, India",
