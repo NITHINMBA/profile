@@ -6,7 +6,7 @@ export const personalInfo = {
   phone: "+91 9788546486",
   location: "Chennai, India",
   linkedin: "https://linkedin.com/in/nithinmc",
-  profileImage: "https://github.com/NITHINMBA/profile/blob/main/dist/assets/Photo.jpg"
+  profileImage: "https://github.com/NITHINMBA/profile/blob/main/dist/assets/Photo.jpg?raw=true"
 };
 
 export const aboutInfo = {
