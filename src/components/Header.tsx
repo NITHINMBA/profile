@@ -12,10 +12,9 @@ export const Header: React.FC = () => {
             <img
               src={personalInfo.profileImage}
               alt="Nithiyananthan M"
-              className="w-32 h-32 sm:w-40 sm:h-40 rounded-full mx-auto border-4 border-white dark:border-navy-700 shadow-xl object-cover"
+              className="w-32 h-32 sm:w-40 sm:h-40 mx-auto border-4 border-white dark:border-navy-700 shadow-xl object-cover"
             />
           </div>
-
           {/* Name and Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900 dark:text-white mb-4 animate-slide-up">
             {personalInfo.name}
