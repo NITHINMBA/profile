@@ -1,7 +1,8 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/profile/', // <-- This is important for GitHub Pages!
-  plugins: [react()],
-});
+  base: '/profile/',
+  build: {
+    outDir: 'dist'
+  }
+})
