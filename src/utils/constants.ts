@@ -10,7 +10,7 @@ export const personalInfo = {
 };
 
 export const aboutInfo = {
-  description: "Self-motivated AI-driven Business Analyst with expertise in requirements gathering, stakeholder collaboration, and process optimization. Currently pursuing advanced certifications in Agile methodologies and AI for business applications. Passionate about bridging the gap between business needs and technical solutions through comprehensive analysis and strategic documentation.",
+  description: "07/08/25 test - 13:16 ->>>>> Self-motivated AI-driven Business Analyst with expertise in requirements gathering, stakeholder collaboration, and process optimization. Currently pursuing advanced certifications in Agile methodologies and AI for business applications. Passionate about bridging the gap between business needs and technical solutions through comprehensive analysis and strategic documentation.",
   highlights: [
     "MBA in Operations & HR (94.5% TANCET score)",
     "B.Tech in Information Technology",
