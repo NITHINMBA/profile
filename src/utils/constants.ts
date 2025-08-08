@@ -1,11 +1,11 @@
 export const personalInfo = {
   name: "NITHIYANANTHAN M",
-  title: "Business Analyst | AI-Enthuisast",
+  title: "Business Analyst | AI-Enthusiast",
   tagline: "Transforming business requirements into innovative solutions through data-driven insights and strategic analysis",
   email: "mcnithin99@gmail.com",
   phone: "+91 9788546486",
   location: "Chennai, India",
-  linkedin: "https://linkedin.com/in/nithinmc",
+  linkedin: "https://www.linkedin.com/in/nithinmc",
   profileImage: "https://github.com/NITHINMBA/profile/blob/gh-pages/Photo.jpg?raw=true"
 };
 
