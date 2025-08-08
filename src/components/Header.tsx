@@ -8,13 +8,13 @@ export const Header: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center animate-fade-in">
           {/* Profile Image */}
-          <div className="mb-8">
-            <img
-              src={personalInfo.profileImage}
-              alt="error11"
-              className="w-32 h-32 sm:w-40 sm:h-40 mx-auto border-4 border-white dark:border-navy-700 shadow-xl object-cover"
-            />
-          </div>
+            <div className="mb-8">
+              <img
+                src={personalInfo.profileImage || '/default-profile.png'}
+                alt={personalInfo.name ? `${personalInfo.name} profile` : 'Profile image'}
+                className="w-32 h-32 sm:w-40 sm:h-40 mx-auto border-4 border-white dark:border-navy-700 shadow-xl object-cover rounded-full"
+              />
+            </div>
 
           {/* Name and Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900 dark:text-white mb-4 animate-slide-up">
