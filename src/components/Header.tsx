@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
           <div className="mb-8">
             <img
               src={personalInfo.profileImage}
-              alt="error"
+              alt="error11"
               className="w-32 h-32 sm:w-40 sm:h-40 mx-auto border-4 border-white dark:border-navy-700 shadow-xl object-cover"
             />
           </div>
