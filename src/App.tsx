@@ -1,39 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
-import { Header } from './components/Header';
-import { About } from './components/About';
-import { Experience } from './components/Experience';
+import { Home } from './components/Home';
 import { Projects } from './components/Projects';
-import { Skills } from './components/Skills';
-import { Education } from './components/Education';
-import { Certifications } from './components/Certifications';
-import { Contact } from './components/Contact';
-import { useScrollSpy } from './hooks/useScrollSpy';
+import { AboutMe } from './components/AboutMe';
+import { Footer } from './components/Footer';
 import { navigationItems } from './utils/constants';
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const sectionIds = navigationItems.map(item => item.id);
-  const activeSection = useScrollSpy(sectionIds);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const handler = (event: CustomEvent) => {
+      setActiveSection(event.detail);
+    };
+
+    window.addEventListener('navigate', handler as EventListener);
+    return () => window.removeEventListener('navigate', handler as EventListener);
+  }, []);
+
+  const handleNavigate = (section: string) => {
+    setActiveSection(section);
+  };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-navy-900 transition-colors duration-300">
+    <div className="min-h-screen bg-white text-blue-900 transition-colors duration-300">
       <Navigation 
         activeSection={activeSection}
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
+        onNavigate={handleNavigate}
       />
       
-      <main>
-        <Header />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Education />
-        <Certifications />
-        <Contact />
+      <main className="pt-24">
+        {activeSection === 'home' && <Home />}
+        {activeSection === 'projects' && <Projects />}
+        {activeSection === 'about' && <AboutMe />}
       </main>
+      
+      <Footer />
     </div>
   );
 }

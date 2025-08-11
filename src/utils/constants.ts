@@ -1,12 +1,13 @@
 export const personalInfo = {
   name: "NITHIYANANTHAN M",
+  displayName: "Nithin",
   title: "Business Analyst | AI-Enthusiast",
   tagline: "Transforming business requirements into innovative solutions through data-driven insights and strategic analysis",
   email: "mcnithin99@gmail.com",
   phone: "+91 9788546486",
   location: "Chennai, India",
   linkedin: "https://www.linkedin.com/in/nithinmc",
-  profileImage: "https://github.com/NITHINMBA/profile/blob/gh-pages/Photo.jpg?raw=true"
+  profileImage: "https://github.com/NITHINMBA/profile/blob/gh-pages/Photoff.jpg?raw=true"
 };
 
 export const aboutInfo = {
@@ -115,10 +116,7 @@ export const certificationsData = [
 ];
 
 export const navigationItems = [
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
+  { id: 'home', label: 'Home' },
   { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
-  { id: 'contact', label: 'Contact' }
+  { id: 'about', label: 'About' }
 ];
