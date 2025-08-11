@@ -56,7 +56,7 @@ export const Home: React.FC = () => {
                 }}
                 onError={(e) => {
                   console.error('Failed to load Photoff.jpg, trying fallback');
-                  e.currentTarget.src = 'https://github.com/NITHINMBA/profile/blob/gh-pages/Photo.jpg?raw=true';
+                  e.currentTarget.src = 'https://github.com/NITHINMBA/profile/blob/gh-pages/Photoff.jpg?raw=true';
                 }}
               />
             </div>

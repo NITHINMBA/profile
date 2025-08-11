@@ -8,7 +8,7 @@ export const Projects: React.FC = () => {
           Projects
         </h2>
         <p className="text-blue-900/80">
-          Coming soon. I will add my projects here.
+          Coming soon. I will add my projects here!.....
         </p>
       </div>
     </section>
