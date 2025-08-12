@@ -45,7 +45,7 @@ export const Home: React.FC = () => {
               style={{ height: '100vh' }}
             >
               <img
-                src="https://github.com/NITHINMBA/profile/blob/main/public/Photo%20cut%20bw.JPG?raw=true"
+                src="https://raw.githubusercontent.com/NITHINMBA/profile/main/public/Photo%20cut%20bw.JPG"
                 alt="Nithin - Professional Headshot"
                 loading="eager"
                 decoding="async"
@@ -56,7 +56,7 @@ export const Home: React.FC = () => {
                 }}
                 onError={(e) => {
                   console.error('Failed to load Photoff.jpg, trying fallback');
-                  e.currentTarget.src = 'https://github.com/NITHINMBA/profile/blob/main/public/Photo%20cut%20bw.JPG?raw=true';
+                  e.currentTarget.src = 'https://raw.githubusercontent.com/NITHINMBA/profile/main/public/Photo%20cut%20bw.JPG';
                 }}
               />
             </div>
