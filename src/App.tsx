@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { Home } from './components/Home';
 import { Projects } from './components/Projects';
+import { ProductDesigns } from './components/ProductDesigns';
 import { AboutMe } from './components/AboutMe';
 import { Footer } from './components/Footer';
 import { navigationItems } from './utils/constants';
@@ -30,10 +31,24 @@ function App() {
       />
       
       {activeSection === 'home' ? (
-        <Home />
+        <div className="h-full flex flex-col">
+          <Home />
+          <Footer compact />
+        </div>
       ) : (
         <main className="pt-24">
           {activeSection === 'projects' && <Projects />}
+          {activeSection === 'product-designs' && (
+            <ProductDesigns />
+          )}
+          {activeSection === 'research-works' && (
+            <div className="min-h-screen flex items-center justify-center">
+              <div className="text-center">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">Research Works</h1>
+                <p className="text-gray-600">Coming soon...</p>
+              </div>
+            </div>
+          )}
           {activeSection === 'about' && <AboutMe />}
         </main>
       )}
