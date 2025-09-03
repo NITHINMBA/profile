@@ -23,19 +23,22 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-blue-900 transition-colors duration-300">
+    <div className={`${activeSection === 'home' ? 'h-screen overflow-hidden' : 'min-h-screen'} bg-white text-blue-900 transition-colors duration-300`}>
       <Navigation 
         activeSection={activeSection}
         onNavigate={handleNavigate}
       />
       
-      <main className="pt-24">
-        {activeSection === 'home' && <Home />}
-        {activeSection === 'projects' && <Projects />}
-        {activeSection === 'about' && <AboutMe />}
-      </main>
+      {activeSection === 'home' ? (
+        <Home />
+      ) : (
+        <main className="pt-24">
+          {activeSection === 'projects' && <Projects />}
+          {activeSection === 'about' && <AboutMe />}
+        </main>
+      )}
       
-      <Footer />
+      {activeSection !== 'home' && <Footer />}
     </div>
   );
 }

@@ -7,8 +7,8 @@ export const Home: React.FC = () => {
   useRoleCycler('roleText');
 
   return (
-    <div className="min-h-screen flex flex-col bg-white" style={{ minHeight: '100vh', width: '100vw', maxWidth: '100vw', overflow: 'hidden' }}>
-      <main className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center" style={{ width: '100%', minHeight: 0 }}>
+    <div className="h-screen flex flex-col bg-white" style={{ height: '100vh', width: '100vw', maxWidth: '100vw', overflow: 'hidden' }}>
+      <main className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center pt-24" style={{ width: '100%', height: '100%' }}>
         {/* Left Column - Welcome Message */}
         <div className="flex-1 flex flex-col justify-center items-start px-4 sm:px-6 lg:px-8 lg:pl-8 min-h-0">
           <p className="text-2xl sm:text-3xl text-gray-600 font-normal mb-2">Hey,</p>
@@ -44,7 +44,7 @@ export const Home: React.FC = () => {
             decoding="async"
             className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover rounded-2xl"
             style={{
-              maxHeight: 'calc(100vh - 40px)', // 40px for footer
+              maxHeight: 'calc(100vh - 120px)', // Account for navigation and padding
               width: '100%',
               objectFit: 'cover',
               display: 'block',
