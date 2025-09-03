@@ -5,6 +5,7 @@
 /* Mobile-first helpers */
 :root { --vh: 1vh; }
 .full-height { height: calc(var(--vh, 1vh) * 100); }
+.home-container { height: calc(var(--vh, 1vh) * 100); display: flex; align-items: center; justify-content: center; overflow: hidden; width: 100vw; }
 
 /* Touch + a11y defaults */
 * { -webkit-tap-highlight-color: transparent; }

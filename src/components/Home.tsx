@@ -2,26 +2,27 @@ import React from 'react';
 // import { Footer } from './Footer';
 import { personalInfo } from '../utils/constants';
 import { useRoleCycler } from './HomeRoleScript';
+import { Footer } from './Footer';
 
 export const Home: React.FC = () => {
   useRoleCycler('roleText');
 
   return (
-    <div className="flex-1 flex flex-col bg-white" style={{ width: '100vw', maxWidth: '100vw', overflow: 'hidden' }}>
-      <main className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center pt-24 pb-4" style={{ width: '100%', minHeight: 0 }}>
+    <div className="home-container bg-white flex-col justify-between" style={{ width: '100vw', maxWidth: '100vw' }}>
+      <main className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center pt-20 sm:pt-24 pb-2 sm:pb-3" style={{ width: '100%', minHeight: 0 }}>
         {/* Left Column - Welcome Message */}
         <div className="flex-1 flex flex-col justify-center items-start px-4 sm:px-6 lg:px-8 lg:pl-8 min-h-0">
-          <p className="text-2xl sm:text-3xl text-gray-600 font-normal mb-2">Hey,</p>
-          <p className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-2">
+          <p className="text-[7.5vw] sm:text-3xl text-gray-600 font-normal mb-1 leading-none">Hey,</p>
+          <p className="text-[10.5vw] sm:text-6xl font-bold tracking-tight leading-tight mb-1">
             <span className="bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
               I'm Nithin.
             </span>
           </p>
-          <p className="text-2xl sm:text-3xl font-normal tracking-tight leading-tight mb-2 whitespace-nowrap">
+          <p className="text-[4.8vw] sm:text-3xl font-normal tracking-tight leading-tight mb-2">
             <span className="text-gray-900">Aspiring in</span>
             <span
               id="roleText"
-              className="inline-block opacity-100 text-gray-700 italic ml-2 align-baseline min-w-[24ch]"
+              className="inline-block opacity-100 text-gray-700 italic ml-2 align-baseline min-w-[20ch]"
             >
               Product Management
             </span>
@@ -36,15 +37,15 @@ export const Home: React.FC = () => {
           </div>
         </div>
         {/* Right Column - Photo */}
-        <div className="flex-1 flex justify-center items-center px-4 lg:px-0 min-h-0">
+        <div className="flex-1 flex justify-center items-center px-4 lg:px-0 min-h-0 mt-6 sm:mt-0">
           <img
             src={personalInfo.profileImage}
             alt="Nithin - Professional Headshot"
             loading="eager"
             decoding="async"
-            className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover rounded-2xl"
+            className="w-[62vw] sm:w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover rounded-2xl"
             style={{
-              maxHeight: 'calc(100vh - 200px)', // Account for navigation, footer, and padding
+              maxHeight: 'calc(var(--vh, 1vh) * 100 - 260px)',
               width: '100%',
               objectFit: 'cover',
               display: 'block',
@@ -56,7 +57,7 @@ export const Home: React.FC = () => {
           />
         </div>
       </main>
-  {/* Footer removed: already rendered globally in App.tsx */}
+      <Footer compact />
     </div>
   );
 };

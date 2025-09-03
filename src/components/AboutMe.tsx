@@ -37,15 +37,15 @@ export const AboutMe: React.FC = () => {
       {/* Header */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
         <div className="max-w-6xl mx-auto">
-          <h1
+          <h1 
             ref={(el) => addRef(el, 0)}
-            className="hero-heading text-5xl sm:text-6xl font-bold tracking-tight mb-4 fade-in-up"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 fade-in-up bg-gradient-to-r from-blue-700 via-indigo-600 to-violet-600 bg-clip-text text-transparent"
           >
-            Designing pragmatic AI & product solutions that move from insight → MVP → growth.
+            From insights to MVP to growth—practical AI & product solutions
           </h1>
-          <p
+          <p 
             ref={(el) => addRef(el, 1)}
-            className="hero-bio text-lg sm:text-xl max-w-3xl text-gray-600 fade-in-up"
+            className="text-base sm:text-lg lg:text-xl max-w-3xl text-gray-600 fade-in-up"
           >
             I translate user problems into measurable product outcomes — blending product intuition, data, and modern AI to ship fast and scale reliably.
           </p>
@@ -98,8 +98,68 @@ export const AboutMe: React.FC = () => {
       {/* Two Column Storytelling Layout */}
       <section id="about-content" className="px-4 sm:px-6 lg:px-8 pb-24 mt-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
-          {/* Left: Timeline */}
-          <div className="md:col-span-5">
+          {/* Left: Education & Certifications (emphasized) */}
+          <div className="md:col-span-5 order-1 md:order-none">
+            <div className="space-y-6">
+              {/* Education Title */}
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 fade-in-up" ref={(el) => addRef(el, 19)}>
+                <span className="inline-flex items-center gap-2">
+                  <span className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</span>
+                  Education
+                </span>
+              </h2>
+              {/* Education cards */}
+              <article ref={(el) => addRef(el, 20)} className="fade-in-up p-5 rounded-2xl border border-gray-200 bg-white shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] transition-transform hover:-translate-y-0.5">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</div>
+                  <div>
+                    <p className="text-xs text-gray-500">2022–2024</p>
+                    <h3 className="text-lg font-semibold text-gray-900">MBA (Operations & HR)</h3>
+                    <p className="text-sm text-gray-600">University of Madras</p>
+                  </div>
+                </div>
+              </article>
+              <article ref={(el) => addRef(el, 21)} className="fade-in-up p-5 rounded-2xl border border-gray-200 bg-white shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] transition-transform hover:-translate-y-0.5">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</div>
+                  <div>
+                    <p className="text-xs text-gray-500">2016–2020</p>
+                    <h3 className="text-lg font-semibold text-gray-900">B.Tech (Information Technology)</h3>
+                    <p className="text-sm text-gray-600">Anna University</p>
+                  </div>
+                </div>
+              </article>
+              {/* Certifications Title */}
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 fade-in-up" ref={(el) => addRef(el, 22)}>
+                <span className="inline-flex items-center gap-2">
+                  <span className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🏅</span>
+                  Certifications
+                </span>
+          </h2>
+              {/* Certifications */}
+              <article ref={(el) => addRef(el, 23)} className="fade-in-up p-5 rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] transition-transform hover:-translate-y-0.5" aria-labelledby="cert-list">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">🏅</div>
+                  <div>
+                    <ul id="cert-list" className="mt-1 grid grid-cols-1 gap-2 text-sm text-gray-700">
+                      <li className="inline-flex items-center gap-2"><span>🏆</span> Atlassian Agile PM</li>
+                      <li className="inline-flex items-center gap-2"><span>🏆</span> Technical PM</li>
+                      <li className="inline-flex items-center gap-2"><span>🏆</span> Agile Product Owner</li>
+                      <li className="inline-flex items-center gap-2"><span>🏆</span> SAFe</li>
+                      <li className="inline-flex items-center gap-2"><span>🏆</span> Generative AI for BAs</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              {/* Metrics removed as requested */}
+            </div>
+          </div>
+
+          {/* Right: Remaining content (Timeline, Skills, etc.) */}
+          <div className="md:col-span-7">
+            {/* Professional Experience */}
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 fade-in-up">Professional Experience</h2>
             <div className="relative pl-6">
               <div className="absolute left-3 top-0 bottom-0 w-px bg-gray-200" />
 
@@ -145,10 +205,9 @@ export const AboutMe: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right: Skills / Highlight Board */}
-          <div className="md:col-span-7">
+            {/* Skills / Highlight Board */}
+            <h2 className="mt-10 text-xl sm:text-2xl font-bold text-gray-900 mb-4 fade-in-up">Skills & Tools</h2>
             <div ref={(el) => addRef(el, 5)} className="grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in-up">
               {/* Business Analysis & PM */}
               <div className="p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] transition-all">
@@ -203,34 +262,7 @@ export const AboutMe: React.FC = () => {
               </div>
             </div>
 
-            {/* Education & Certifications strip */}
-            <div ref={(el) => addRef(el, 6)} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in-up">
-              <div className="p-5 rounded-xl border border-gray-200 bg-white/70">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</div>
-                  <div>
-                    <p className="text-xs text-gray-500">2022–2024</p>
-                    <p className="text-sm font-semibold text-gray-900">MBA (Operations & HR) – University of Madras</p>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</div>
-                  <div>
-                    <p className="text-xs text-gray-500">2016–2020</p>
-                    <p className="text-sm font-semibold text-gray-900">B.Tech (Information Technology) – Anna University</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-5 rounded-xl border border-gray-200 bg-white/70">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🏅</div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-900">Certifications</p>
-                    <p className="text-xs text-gray-600 mt-1">Atlassian Agile PM, Technical PM, Agile Product Owner, SAFe, Generative AI for BAs</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Education/Certifications moved to left column */}
 
             {/* Selected Impact metrics */}
             <div ref={(el) => addRef(el, 16)} className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 fade-in-up">

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { Home } from './components/Home';
 import { Projects } from './components/Projects';
 import { ProductDesigns } from './components/ProductDesigns';
 import { AboutMe } from './components/AboutMe';
 import { Footer } from './components/Footer';
-import { navigationItems } from './utils/constants';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -24,7 +23,7 @@ function App() {
   };
 
   return (
-    <div className={`${activeSection === 'home' ? 'h-screen overflow-hidden' : 'min-h-screen'} bg-white text-blue-900 transition-colors duration-300`}>
+    <div className={`${activeSection === 'home' ? 'full-height overflow-hidden' : 'min-h-screen'} bg-white text-blue-900 transition-colors duration-300`}>
       <Navigation 
         activeSection={activeSection}
         onNavigate={handleNavigate}
@@ -33,7 +32,6 @@ function App() {
       {activeSection === 'home' ? (
         <div className="h-full flex flex-col">
           <Home />
-          <Footer compact />
         </div>
       ) : (
         <main className="pt-24">

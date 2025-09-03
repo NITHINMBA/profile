@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ compact = false }) => {
             </svg>
           </a>
         </div>
-        {!compact && <p className="mt-6 text-sm text-gray-500">Copyright © Nithin 2025</p>}
+        <p className={`text-sm text-gray-500 ${compact ? 'mt-3' : 'mt-6'}`}>Copyright © Nithin 2025</p>
       </div>
     </footer>
   );
