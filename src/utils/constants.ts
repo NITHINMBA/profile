@@ -117,6 +117,19 @@ export const certificationsData = [
 
 export const navigationItems = [
   { id: 'home', label: 'Home' },
-  { id: 'projects', label: 'Projects' },
+  { id: 'projects', label: 'Works' },
   { id: 'about', label: 'About' }
 ];
+
+export const productDesignContent = {
+  title: 'Rural Women’s Saving App',
+  description:
+    'Empower rural women with a simple, secure, and accessible digital platform for saving, investing, and withdrawing money easily, fostering financial independence and inclusion.',
+  highlights: [
+    'Clear problem statement and measurable success metrics',
+    'End-to-end journey from onboarding to engagement',
+    'System-first UI with modular, reusable patterns'
+  ],
+  logo: '/ss-logo.png',
+  mockupUrl: ''
+};
