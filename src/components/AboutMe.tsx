@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { personalInfo, aboutInfo, experienceData, skillsData, educationData, certificationsData } from '../utils/constants';
+import { personalInfo } from '../utils/constants';
 
 export const AboutMe: React.FC = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -14,7 +14,7 @@ export const AboutMe: React.FC = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
     );
 
     observerRef.current = observer;
@@ -22,11 +22,7 @@ export const AboutMe: React.FC = () => {
       if (ref) observer.observe(ref);
     });
 
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
+    return () => observer.disconnect();
   }, []);
 
   const addRef = (el: HTMLElement | null, index: number) => {
@@ -35,182 +31,261 @@ export const AboutMe: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Floating Particles Background */}
-      <div className="floating-particles">
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-        <div className="particle"></div>
-      </div>
+      {/* Skip link */}
+      <a href="#about-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:bg-white focus:border focus:border-gray-300 focus:px-3 focus:py-2 focus:rounded-md focus:shadow">Skip to content</a>
 
-      {/* Hero Section */}
-      <section className="about-hero py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 
+      {/* Header */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-6xl mx-auto">
+          <h1
             ref={(el) => addRef(el, 0)}
-            className="hero-heading text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 fade-in-up"
+            className="hero-heading text-5xl sm:text-6xl font-bold tracking-tight mb-4 fade-in-up"
           >
-            About Me
+            Designing pragmatic AI & product solutions that move from insight → MVP → growth.
           </h1>
-          <p 
+          <p
             ref={(el) => addRef(el, 1)}
-            className="hero-bio text-xl sm:text-2xl max-w-4xl mx-auto mb-12 fade-in-up"
+            className="hero-bio text-lg sm:text-xl max-w-3xl text-gray-600 fade-in-up"
           >
-            {aboutInfo.description}
+            I translate user problems into measurable product outcomes — blending product intuition, data, and modern AI to ship fast and scale reliably.
           </p>
+
+          {/* Top CTAs */}
+          <div className="mt-8 flex flex-wrap items-center gap-4 fade-in-up" ref={(el) => addRef(el, 14)}>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
+              aria-label="Download Resume"
+            >
+              {/* document-text */}
+              <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm0 2.5L18.5 9H14V4.5ZM7 13h10v2H7v-2Zm0 4h10v2H7v-2ZM7 9h6v2H7V9Z"/></svg>
+              Download Resume
+            </a>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-gray-300 text-gray-900 text-sm font-medium hover:border-gray-400 hover:bg-gray-50 transition-colors"
+              aria-label="Let's talk"
+            >
+              {/* mail */}
+              <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 2v.01L12 12 4 6.01V6h16ZM4 18V8l8 6 8-6v10H4Z"/></svg>
+              Let’s talk
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Experience Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 
-            ref={(el) => addRef(el, 2)}
-            className="text-4xl font-bold text-gray-900 mb-16 text-center slide-in-left"
-          >
-            Professional Experience
-          </h2>
-          <div className="space-y-12">
-            {experienceData.map((exp, index) => (
-              <div 
-                key={index}
-                ref={(el) => addRef(el, 3 + index)}
-                className={`grid grid-cols-1 lg:grid-cols-3 gap-8 items-start ${
-                  index % 2 === 0 ? 'slide-in-left' : 'slide-in-right'
-                }`}
-              >
-                <div className="lg:col-span-2">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{exp.role}</h3>
-                  <p className="text-xl text-blue-600 font-semibold mb-2">{exp.company}</p>
-                  <p className="text-gray-600 mb-4">{exp.duration}</p>
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((resp, respIndex) => (
-                      <li key={respIndex} className="flex items-start">
-                        <span className="text-blue-500 mr-3 mt-2">•</span>
-                        <span className="text-gray-700">{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex justify-center lg:justify-end">
-                  <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
-                    {exp.company.charAt(0)}
-                  </div>
-                </div>
-              </div>
+      {/* Career Highlights chips */}
+      <section className="px-4 sm:px-6 lg:px-8" aria-label="Career highlights">
+        <div className="max-w-6xl mx-auto fade-in-up" ref={(el) => addRef(el, 15)}>
+          <div className="flex flex-wrap items-center gap-3">
+            {[
+              { label: '0→1 MVPs • Telecom & CX', icon: '⚡' },
+              { label: 'AI + Automation • RAG & LLMs', icon: '🤖' },
+              { label: 'Figma → Prod-ready wireframes', icon: '🧩' },
+              { label: 'Data-led decisions • PowerBI & SQL', icon: '📊' },
+            ].map((c) => (
+              <span key={c.label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs bg-gray-100 text-gray-700 border border-gray-200">
+                <span aria-hidden="true">{c.icon}</span>
+                {c.label}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 
-            ref={(el) => addRef(el, 6)}
-            className="text-4xl font-bold text-gray-900 mb-16 text-center scale-in"
-          >
-            Skills & Expertise
-          </h2>
-          
-          {/* Technical Tools */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Technical Tools</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8">
-              {skillsData.technicalTools.map((tool, index) => (
-                <div 
-                  key={index}
-                  ref={(el) => addRef(el, 7 + index)}
-                  className="skill-icon text-center fade-in-up"
-                >
-                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
-                    <span className="text-white text-2xl">🔧</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-700">{tool.name}</p>
-                  <p className="text-xs text-gray-500">{tool.description}</p>
-                  <div className="skill-tooltip">{tool.name}</div>
+      {/* Two Column Storytelling Layout */}
+      <section id="about-content" className="px-4 sm:px-6 lg:px-8 pb-24 mt-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+          {/* Left: Timeline */}
+          <div className="md:col-span-5">
+            <div className="relative pl-6">
+              <div className="absolute left-3 top-0 bottom-0 w-px bg-gray-200" />
+
+              {/* 2024–Present */}
+              <div ref={(el) => addRef(el, 2)} className="relative mb-10 fade-in-up">
+                <div className="absolute -left-1.5 top-1 w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm">
+                  <span className="text-[15px]">💼</span>
                 </div>
-              ))}
+                <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.25)]">
+                  <p className="text-xs tracking-wide text-gray-500">2024–Present</p>
+                  <h3 className="mt-1 text-base font-semibold text-gray-900">Business Analyst – Bahwan CyberTek</h3>
+                  <p className="mt-2 text-sm text-gray-700 leading-6">
+                    Led market research, AI-powered telecom solutions, and MVP delivery for enterprise tools like dtWorks and Bill Automation.
+                  </p>
+                </div>
+              </div>
+
+              {/* 2024 Intern */}
+              <div ref={(el) => addRef(el, 3)} className="relative mb-10 fade-in-up">
+                <div className="absolute -left-1.5 top-1 w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm">
+                  <span className="text-[15px]">🧠</span>
+                </div>
+                <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.25)]">
+                  <p className="text-xs tracking-wide text-gray-500">2024</p>
+                  <h3 className="mt-1 text-base font-semibold text-gray-900">Business Analyst Intern – Srushty Global Solutions</h3>
+                  <p className="mt-2 text-sm text-gray-700 leading-6">
+                    Designed BRDs, wireframes, and user flows for an ML-based catheter defect detection system.
+                  </p>
+                </div>
+              </div>
+
+              {/* 2023–2024 Incubator */}
+              <div ref={(el) => addRef(el, 4)} className="relative mb-2 fade-in-up">
+                <div className="absolute -left-1.5 top-1 w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm">
+                  <span className="text-[15px]">🎓</span>
+                </div>
+                <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.25)]">
+                  <p className="text-xs tracking-wide text-gray-500">2023–2024</p>
+                  <h3 className="mt-1 text-base font-semibold text-gray-900">Business Incubator – University of Madras</h3>
+                  <p className="mt-2 text-sm text-gray-700 leading-6">
+                    Organized pitch events linking students with investors for MVP development and startup launches.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Core Competencies */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-gray-800 mb-8 text-center">Core Competencies</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skillsData.coreCompetencies.map((skill, index) => (
-                <div 
-                  key={index}
-                  ref={(el) => addRef(el, 14 + index)}
-                  className="skill-icon p-6 bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 fade-in-up"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg flex items-center justify-center mb-4">
-                    <span className="text-white text-xl">💡</span>
+          {/* Right: Skills / Highlight Board */}
+          <div className="md:col-span-7">
+            <div ref={(el) => addRef(el, 5)} className="grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in-up">
+              {/* Business Analysis & PM */}
+              <div className="p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] transition-all">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">📊</div>
+                  <h4 className="text-sm font-semibold tracking-wide text-gray-900">Business Analysis & PM</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['Requirements','Agile Scrum','SDLC','A/B Testing','UAT'].map((t) => (
+                    <span key={t} className="px-3 py-1.5 rounded-full text-xs bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-900 hover:text-white transition-colors">{t}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tools */}
+              <div className="p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] transition-all">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">🧰</div>
+                  <h4 className="text-sm font-semibold tracking-wide text-gray-900">Tools</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['Excel','SQL','Power BI','JIRA','Confluence','Figma','Balsamiq','Draw.io'].map((t) => (
+                    <span key={t} className="px-3 py-1.5 rounded-full text-xs bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-900 hover:text-white transition-colors">{t}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* AI & Automation */}
+              <div className="p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] transition-all">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">🤖</div>
+                  <h4 className="text-sm font-semibold tracking-wide text-gray-900">AI & Automation</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['LangChain','RAG','LLMs','n8n','Agentic AI Architecture','No-Code Platforms'].map((t) => (
+                    <span key={t} className="px-3 py-1.5 rounded-full text-xs bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-900 hover:text-white transition-colors">{t}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Documentation */}
+              <div className="p-6 rounded-2xl border border-gray-200 bg-white/70 backdrop-blur shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] transition-all">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-gray-900 text-white flex items-center justify-center">📄</div>
+                  <h4 className="text-sm font-semibold tracking-wide text-gray-900">Documentation</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {['BRD','PRD','FRD','SRS','Wireframes','BPMN','Prototypes'].map((t) => (
+                    <span key={t} className="px-3 py-1.5 rounded-full text-xs bg-gray-100 text-gray-700 border border-gray-200 hover:bg-gray-900 hover:text-white transition-colors">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Education & Certifications strip */}
+            <div ref={(el) => addRef(el, 6)} className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in-up">
+              <div className="p-5 rounded-xl border border-gray-200 bg-white/70">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</div>
+                  <div>
+                    <p className="text-xs text-gray-500">2022–2024</p>
+                    <p className="text-sm font-semibold text-gray-900">MBA (Operations & HR) – University of Madras</p>
                   </div>
-                  <h4 className="font-semibold text-gray-800 mb-2">{skill.name}</h4>
-                  <div className="skill-tooltip">{skill.name}</div>
+                </div>
+                <div className="mt-3 flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🎓</div>
+                  <div>
+                    <p className="text-xs text-gray-500">2016–2020</p>
+                    <p className="text-sm font-semibold text-gray-900">B.Tech (Information Technology) – Anna University</p>
+                  </div>
+                </div>
+              </div>
+              <div className="p-5 rounded-xl border border-gray-200 bg-white/70">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">🏅</div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900">Certifications</p>
+                    <p className="text-xs text-gray-600 mt-1">Atlassian Agile PM, Technical PM, Agile Product Owner, SAFe, Generative AI for BAs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Selected Impact metrics */}
+            <div ref={(el) => addRef(el, 16)} className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 fade-in-up">
+              {[
+                { metric: '3+ MVPs shipped', note: 'From concept to client demo.' },
+                { metric: '50+ user interviews', note: 'Actionable pain points surfaced.' },
+                { metric: '−30% TAT via automations', note: 'Operational efficiency gains.' },
+              ].map((m) => (
+                <div key={m.metric} className="p-6 rounded-2xl border border-gray-200 bg-white/70 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.3)] transition-all">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">📈</div>
+                    <p className="text-sm font-semibold text-gray-900">{m.metric}</p>
+                  </div>
+                  <p className="text-xs text-gray-600">{m.note}</p>
                 </div>
               ))}
+            </div>
+
+            {/* Voice & Tone */}
+            <div ref={(el) => addRef(el, 17)} className="mt-8 p-6 rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 fade-in-up">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-lg bg-gray-900 text-white flex items-center justify-center">❝</div>
+                <p className="text-sm text-gray-800">I combine product rigor with empathy — building products people trust and teams can ship.</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Education & Certifications */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Education */}
+      {/* Bottom CTA */}
+      <section className="px-4 sm:px-6 lg:px-8 pb-24" aria-label="Contact and resume">
+        <div className="max-w-6xl mx-auto fade-in-up" ref={(el) => addRef(el, 18)}>
+          <div className="rounded-2xl border border-gray-200 bg-white/70 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)]">
             <div>
-              <h2 
-                ref={(el) => addRef(el, 20)}
-                className="text-3xl font-bold text-gray-900 mb-8 slide-in-left"
-              >
-                Education
-              </h2>
-              <div className="space-y-6">
-                {educationData.map((edu, index) => (
-                  <div 
-                    key={index}
-                    ref={(el) => addRef(el, 21 + index)}
-                    className="bg-white p-6 rounded-xl shadow-lg border border-gray-100 fade-in-up"
-                  >
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{edu.degree}</h3>
-                    <p className="text-blue-600 font-medium mb-1">{edu.institution}</p>
-                    <p className="text-gray-600 text-sm mb-1">{edu.duration}</p>
-                    <p className="text-gray-500 text-sm">{edu.location}</p>
-                    {edu.score && <p className="text-green-600 font-semibold text-sm mt-2">{edu.score}</p>}
-                  </div>
-                ))}
-              </div>
+              <p className="text-base sm:text-lg font-semibold tracking-tight text-gray-900">Let’s build something real.</p>
+              <p className="text-sm text-gray-600 mt-1">Download my resume or reach out to collaborate.</p>
             </div>
-
-            {/* Certifications */}
-            <div>
-              <h2 
-                ref={(el) => addRef(el, 23)}
-                className="text-3xl font-bold text-gray-900 mb-8 slide-in-right"
-              >
-                Certifications
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {certificationsData.map((cert, index) => (
-                  <div 
-                    key={index}
-                    ref={(el) => addRef(el, 24 + index)}
-                    className="bg-white p-4 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 fade-in-up"
-                  >
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-white text-sm">🏆</span>
-                      </div>
-                      <span className="text-sm font-medium text-gray-700">{cert}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-3">
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors" aria-label="Download full CV">
+                <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm0 2.5L18.5 9H14V4.5ZM7 13h10v2H7v-2Zm0 4h10v2H7v-2ZM7 9h6v2H7V9Z"/></svg>
+                Download full CV
+              </a>
+              <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-gray-300 text-gray-900 text-sm font-medium hover:border-gray-400 hover:bg-gray-50 transition-colors" aria-label="Schedule a quick chat">
+                <svg aria-hidden="true" className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 2v.01L12 12 4 6.01V6h16ZM4 18V8l8 6 8-6v10H4Z"/></svg>
+                Schedule a quick chat
+              </a>
             </div>
+          </div>
+          <div className="flex items-center gap-4 mt-4" aria-label="Social links">
+            <a href="https://github.com/NITHINMBA" target="_blank" rel="noopener noreferrer" className="p-2 rounded hover:bg-gray-50 transition-colors" aria-label="GitHub">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.11.79-.25.79-.56v-2.16c-3.23.7-3.91-1.4-3.91-1.4-.53-1.35-1.3-1.7-1.3-1.7-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.75-1.56-2.58-.29-5.29-1.29-5.29-5.75 0-1.27.46-2.31 1.2-3.13-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.2a11.08 11.08 0 0 1 5.83 0c2.22-1.51 3.2-1.2 3.2-1.2.63 1.59.23 2.76.11 3.05.75.82 1.2 1.86 1.2 3.13 0 4.47-2.72 5.46-5.31 5.74.43.37.81 1.1.81 2.22v3.29c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+            </a>
+            <a href={"https://www.linkedin.com/in/nithinmc"} target="_blank" rel="noopener noreferrer" className="p-2 rounded hover:bg-gray-50 transition-colors" aria-label="LinkedIn">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zm7.5 0h3.8v2h.05c.53-1 1.82-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.06V23h-4v-5.9c0-1.41-.03-3.22-1.96-3.22-1.96 0-2.26 1.53-2.26 3.12V23h-4V8.5z"/></svg>
+            </a>
           </div>
         </div>
       </section>

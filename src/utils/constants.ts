@@ -131,5 +131,5 @@ export const productDesignContent = {
     'System-first UI with modular, reusable patterns'
   ],
   logo: '/ss-logo.png',
-  mockupUrl: ''
+  mockupUrl: 'https://nithinmba.github.io/shesaves-prototype-pink/'
 };

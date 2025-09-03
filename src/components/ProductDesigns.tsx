@@ -4,11 +4,12 @@ import { personalInfo, productDesignContent } from '../utils/constants';
 export const ProductDesigns: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'intro' | 'mockup'>('intro');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isIframeLoading, setIsIframeLoading] = useState(true);
 
   const openMockup = () => {
     if (productDesignContent.mockupUrl) {
       setActiveTab('mockup');
-      setIsModalOpen(true);
+      setIsIframeLoading(true);
     }
   };
 
@@ -93,7 +94,46 @@ export const ProductDesigns: React.FC = () => {
               </div>
             )}
 
-            {/* Modal for mockup */}
+            {/* Mockup inline embed */}
+            {activeTab === 'mockup' && (
+              <div className="space-y-4">
+                <div className="rounded-2xl border border-gray-200 bg-white/80 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] overflow-hidden">
+                  <div className="relative">
+                    {isIframeLoading && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-white">
+                        <div className="h-8 w-8 rounded-full border-2 border-gray-300 border-t-gray-900 animate-spin" aria-label="Loading" />
+                      </div>
+                    )}
+                    {productDesignContent.mockupUrl ? (
+                      <iframe
+                        src={productDesignContent.mockupUrl}
+                        title="Mockup Preview"
+                        className="w-full h-[70vh] sm:h-[80vh]"
+                        onLoad={() => setIsIframeLoading(false)}
+                      />
+                    ) : (
+                      <div className="w-full h-[60vh] flex items-center justify-center text-gray-500">No mock-up URL configured</div>
+                    )}
+                  </div>
+                </div>
+
+                {productDesignContent.mockupUrl && (
+                  <div className="flex items-center justify-end">
+                    <a
+                      href={productDesignContent.mockupUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-900 text-sm font-medium hover:bg-gray-50 transition-colors"
+                    >
+                      Open in new tab
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 5h6v6h-2V8.41l-6.29 6.3-1.42-1.42L15.59 7H13V5Z"/></svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Modal for mockup (optional, not auto-open) */}
             {isModalOpen && (
               <div className="fixed inset-0 z-50 flex items-center justify-center">
                 <div className="absolute inset-0 bg-black/50" onClick={closeModal} />
