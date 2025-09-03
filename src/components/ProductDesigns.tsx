@@ -5,11 +5,13 @@ export const ProductDesigns: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'intro' | 'mockup'>('intro');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isIframeLoading, setIsIframeLoading] = useState(true);
+  const [shouldMountIframe, setShouldMountIframe] = useState(false);
 
   const openMockup = () => {
     if (productDesignContent.mockupUrl) {
       setActiveTab('mockup');
       setIsIframeLoading(true);
+      setShouldMountIframe(true);
     }
   };
 
@@ -104,15 +106,26 @@ export const ProductDesigns: React.FC = () => {
                         <div className="h-8 w-8 rounded-full border-2 border-gray-300 border-t-gray-900 animate-spin" aria-label="Loading" />
                       </div>
                     )}
-                    {productDesignContent.mockupUrl ? (
+                    {productDesignContent.mockupUrl && shouldMountIframe ? (
                       <iframe
                         src={productDesignContent.mockupUrl}
                         title="Mockup Preview"
                         className="w-full h-[70vh] sm:h-[80vh]"
+                        loading="lazy"
                         onLoad={() => setIsIframeLoading(false)}
                       />
-                    ) : (
+                    ) : !productDesignContent.mockupUrl ? (
                       <div className="w-full h-[60vh] flex items-center justify-center text-gray-500">No mock-up URL configured</div>
+                    ) : (
+                      <div className="w-full h-[60vh] flex items-center justify-center">
+                        <button
+                          onClick={() => setShouldMountIframe(true)}
+                          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
+                          aria-label="Load prototype"
+                        >
+                          Load prototype
+                        </button>
+                      </div>
                     )}
                   </div>
                 </div>

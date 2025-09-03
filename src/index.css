@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile-first helpers */
+:root { --vh: 1vh; }
+.full-height { height: calc(var(--vh, 1vh) * 100); }
+
+/* Touch + a11y defaults */
+* { -webkit-tap-highlight-color: transparent; }
+button, a { touch-action: manipulation; }
+
+/* Safe-area for notches */
+.safe-pads { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+
+/* Prevent scroll chaining on sections where needed */
+.contain-overscroll { overscroll-behavior: contain; }
+
 /* Dynamic Island Navigation Styles */
 .dynamic-island-nav {
   background: rgba(255, 255, 255, 0.9);
