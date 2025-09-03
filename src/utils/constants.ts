@@ -130,6 +130,6 @@ export const productDesignContent = {
     'End-to-end journey from onboarding to engagement',
     'System-first UI with modular, reusable patterns'
   ],
-  logo: '/ss-logo.png',
+  logo: "https://raw.githubusercontent.com/NITHINMBA/profile/c43aa89035f87009da3c89834a7194ee92722877/public/sslogo.png",
   mockupUrl: 'https://nithinmba.github.io/shesaves-prototype-pink/'
 };
