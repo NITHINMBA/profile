@@ -1,11 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { Footer } from './Footer';
 import { personalInfo } from '../utils/constants';
 import { useRoleCycler } from './HomeRoleScript';
 import { Footer } from './Footer';
+import { AnimatedAvatar } from './AnimatedAvatar';
+
+const ChatbotModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 transition-opacity duration-300 animate-fade-in" style={{ backdropFilter: 'blur(6px)' }}>
+  <div className="relative bg-white rounded-2xl shadow-2xl max-w-xl w-full mx-4 sm:mx-0 p-0 overflow-hidden animate-scale-in flex flex-col" style={{ minHeight: 420, maxHeight: '90vh', width: '100%', boxShadow: '0 8px 40px rgba(59,130,246,0.18)' }}>
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 bg-white rounded-full p-2 shadow transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-label="Close chatbot modal"
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 6L16 16M16 6L6 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </button>
+        <div className="flex-1 w-full h-full flex items-center justify-center" style={{ minHeight: 0 }}>
+          <iframe
+            src="https://www.chatbase.co/chatbot-iframe/UaurO-7gcDkSJT_8ZfeQY"
+            width="100%"
+            height="100%"
+            style={{ minHeight: 420, height: '100%', border: 0, borderRadius: '1rem', background: 'transparent' }}
+            frameBorder="0"
+            allow="clipboard-write"
+            title="AskNithin Chatbot"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const Home: React.FC = () => {
   useRoleCycler('roleText');
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div className="home-container bg-white flex-col justify-between" style={{ width: '100vw', maxWidth: '100vw' }}>
@@ -27,14 +59,23 @@ export const Home: React.FC = () => {
               Product Management
             </span>
           </p>
-          <div className="mt-8 flex items-center gap-4">
+          <div className="mt-8 flex items-center gap-3">
             <button
-              onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'about' }))}
+              onClick={() => setModalOpen(true)}
               className="px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              About Me
+              AskNithin
             </button>
+            <div className="w-12 h-12 sm:w-14 sm:h-14 ml-2 flex items-center justify-center">
+              <AnimatedAvatar className="w-full h-full" />
+            </div>
           </div>
+          <div className="mt-2">
+            <span className="block text-xs sm:text-sm text-gray-400 font-medium tracking-wide" style={{ fontFamily: 'Georgia, serif', letterSpacing: '0.02em' }}>
+              Nithin's personalized AI Assistant
+            </span>
+          </div>
+          <ChatbotModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </div>
         {/* Right Column - Photo */}
         <div className="flex-1 flex justify-center items-center px-4 lg:px-0 min-h-0 mt-6 sm:mt-0">

@@ -249,6 +249,22 @@ button, a { touch-action: manipulation; }
   transform: scale(1);
 }
 
+/* Modal Animations */
+.animate-fade-in {
+  animation: fadeInModal 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.animate-scale-in {
+  animation: scaleInModal 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes fadeInModal {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes scaleInModal {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* Animations */
 @keyframes float-slow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
