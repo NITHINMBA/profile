@@ -86,11 +86,14 @@ export const Home: React.FC = () => {
             decoding="async"
             className="w-[62vw] sm:w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover rounded-2xl"
             style={{
-              maxHeight: 'calc(var(--vh, 1vh) * 100 - 260px)',
+              height: 'auto',
+              minHeight: '220px',
+              maxHeight: '480px',
               width: '100%',
               objectFit: 'cover',
               display: 'block',
-              margin: '0 auto'
+              margin: '0 auto',
+              aspectRatio: '4/5'
             }}
             onError={(e) => {
               e.currentTarget.src = 'https://raw.githubusercontent.com/NITHINMBA/profile/main/public/Photo%20cut%20bw.JPG';
