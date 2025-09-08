@@ -41,9 +41,9 @@ export const Home: React.FC = () => {
 
   return (
     <div className="home-container bg-white flex-col justify-between" style={{ width: '100vw', maxWidth: '100vw' }}>
-      <main className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center pt-20 sm:pt-24 pb-2 sm:pb-3" style={{ width: '100%', minHeight: 0 }}>
+  <main className="flex-1 w-full flex flex-col lg:flex-row items-center justify-center pt-20 sm:pt-24 pb-2 sm:pb-3 gap-8 lg:gap-0" style={{ width: '100%', minHeight: 0 }}>
         {/* Left Column - Welcome Message */}
-        <div className="flex-1 flex flex-col justify-center items-start px-4 sm:px-6 lg:px-8 lg:pl-8 min-h-0">
+  <div className="flex-1 flex flex-col justify-center items-center lg:items-start px-4 sm:px-6 lg:px-8 lg:pl-8 min-h-0 text-center lg:text-left">
           <p className="text-[7.5vw] sm:text-3xl text-gray-600 font-normal mb-1 leading-none">Hey,</p>
           <p className="text-[10.5vw] sm:text-6xl font-bold tracking-tight leading-tight mb-1">
             <span className="bg-gradient-to-r from-red-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 bg-clip-text text-transparent">
@@ -59,7 +59,7 @@ export const Home: React.FC = () => {
               Product Management
             </span>
           </p>
-          <div className="mt-8 flex items-center gap-3">
+          <div className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full justify-center lg:justify-start">
             <button
               onClick={() => setModalOpen(true)}
               className="px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm font-medium transition-all duration-200 shadow-lg hover:shadow-xl"
@@ -78,13 +78,13 @@ export const Home: React.FC = () => {
           <ChatbotModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </div>
         {/* Right Column - Photo */}
-        <div className="flex-1 flex justify-center items-center px-4 lg:px-0 min-h-0 mt-6 sm:mt-0">
+  <div className="flex-1 flex justify-center items-center px-4 lg:px-0 min-h-0 mt-8 sm:mt-0">
           <img
             src={personalInfo.profileImage}
             alt="Nithin - Professional Headshot"
             loading="eager"
             decoding="async"
-            className="w-[62vw] sm:w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover rounded-2xl"
+            className="w-full max-w-[260px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto object-cover rounded-2xl mx-auto"
             style={{
               height: 'auto',
               minHeight: '220px',
