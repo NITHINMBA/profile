@@ -225,5 +225,5 @@ export const healHubContent = {
     ]
   },
   logo: null,
-  mockupUrl: ''
+  mockupUrl: 'https://nithinmba.github.io/healhub/'
 };

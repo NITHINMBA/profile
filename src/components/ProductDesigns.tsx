@@ -122,7 +122,7 @@ export const ProductDesigns: React.FC = () => {
                 <div className="w-full mt-4">
                   {renderHealHubContent()}
                   <div className="text-center mt-4">
-                    <button className="inline-block px-4 py-2 rounded-lg bg-gray-200 text-gray-500 text-sm font-medium cursor-not-allowed" disabled>View Mock-up</button>
+                    <a href={healHubContent.mockupUrl} target="_blank" rel="noopener noreferrer" className="inline-block px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors">View Mock-up</a>
                   </div>
                 </div>
               )}
