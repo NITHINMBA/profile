@@ -1,182 +1,139 @@
 import React, { useState } from 'react';
-import { personalInfo, productDesignContent } from '../utils/constants';
+import { personalInfo, productDesignContent, healHubContent } from '../utils/constants';
+
+const Section: React.FC<{ title: string; children: React.ReactNode; className?: string }> = ({ title, children, className }) => (
+  <div className={`bg-white border border-gray-200 rounded-lg p-4 ${className}`}>
+    <h3 className="font-bold text-md text-gray-800 mb-3">{title}</h3>
+    {children}
+  </div>
+);
+
+const BulletList: React.FC<{ items: string[] }> = ({ items }) => (
+  <ul className="space-y-2">
+    {items.map((item, i) => (
+      <li key={i} className="flex items-start">
+        <span className="text-blue-500 mr-2 mt-1">●</span>
+        <span className="text-sm text-gray-600">{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 export const ProductDesigns: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'intro' | 'mockup'>('intro');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isIframeLoading, setIsIframeLoading] = useState(true);
-  const [shouldMountIframe, setShouldMountIframe] = useState(false);
+  const [openCard, setOpenCard] = useState<string | null>(null);
 
-  const openMockup = () => {
-    if (productDesignContent.mockupUrl) {
-      setActiveTab('mockup');
-      setIsIframeLoading(true);
-      setShouldMountIframe(true);
-    }
-  };
+  const renderHealHubContent = () => (
+    <div className="text-left space-y-6 p-2">
+      <p className="text-base leading-relaxed text-gray-700 bg-blue-50 p-4 rounded-lg border border-blue-200">{healHubContent.description}</p>
+      
+      <Section title={healHubContent.problemStatement.title}>
+        <p className="text-sm text-gray-600 mb-3">{healHubContent.problemStatement.description}</p>
+        <BulletList items={healHubContent.problemStatement.points} />
+      </Section>
 
-  const closeModal = () => setIsModalOpen(false);
+      <div className="grid md:grid-cols-2 gap-6">
+        <Section title={healHubContent.asIsProcess.title}>
+          <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600">
+            {healHubContent.asIsProcess.steps.map((s, i) => <li key={i}>{s}</li>)}
+          </ol>
+          <div className="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-500">
+            <p><strong>Actors:</strong> {healHubContent.asIsProcess.actors}</p>
+            <p><strong>Pain Points:</strong> <span className="text-red-600">{healHubContent.asIsProcess.painPoints}</span></p>
+          </div>
+        </Section>
+        <Section title={healHubContent.toBeProcess.title}>
+          <ol className="list-decimal list-inside space-y-2 text-sm text-gray-600">
+            {healHubContent.toBeProcess.steps.map((s, i) => <li key={i}>{s}</li>)}
+          </ol>
+          <div className="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-500">
+            <p><strong>Actors:</strong> {healHubContent.toBeProcess.actors}</p>
+            <p><strong>Benefits:</strong> <span className="text-green-600">{healHubContent.toBeProcess.benefits}</span></p>
+          </div>
+        </Section>
+      </div>
+
+      <Section title={healHubContent.systemFeatures.title}>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {healHubContent.systemFeatures.modules.map(m => (
+            <div key={m.title} className="p-3 bg-gray-50 rounded-md border">
+              <h4 className="font-semibold text-sm text-gray-700 mb-2">{m.title}</h4>
+              <BulletList items={m.points} />
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <Section title={healHubContent.nonFunctionalRequirements.title}>
+          <BulletList items={healHubContent.nonFunctionalRequirements.points} />
+        </Section>
+        <Section title={healHubContent.stakeholderEngagements.title}>
+          <BulletList items={healHubContent.stakeholderEngagements.engagements} />
+           <p className="text-xs text-gray-500 mt-3 pt-3 border-t">{healHubContent.stakeholderEngagements.methods}</p>
+        </Section>
+      </div>
+
+      <Section title={healHubContent.impact.title}>
+        <BulletList items={healHubContent.impact.points} />
+      </Section>
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pt-24 pb-16">
-          {/* Sidebar */}
-          <aside className="md:col-span-3">
-            <div className="sticky top-28 flex md:flex-col gap-3">
-              <button
-                onClick={() => setActiveTab('intro')}
-                className={`px-5 py-3 rounded-lg border transition-all duration-200 text-sm font-medium ${
-                  activeTab === 'intro'
-                    ? 'bg-gray-900 text-white border-gray-900 shadow-lg shadow-gray-900/10'
-                    : 'bg-white text-gray-800 border-gray-200 hover:border-gray-300'
-                }`}
-              >
-                Product Intro
-              </button>
-              <button
-                onClick={openMockup}
-                className={`px-5 py-3 rounded-lg border transition-all duration-200 text-sm font-medium ${
-                  activeTab === 'mockup'
-                    ? 'bg-gray-900 text-white border-gray-900 shadow-lg shadow-gray-900/10'
-                    : 'bg-white text-gray-800 border-gray-200 hover:border-gray-300'
-                }`}
-              >
-                Mock-up
-              </button>
-            </div>
-          </aside>
-
-          {/* Content */}
-          <section className="md:col-span-9">
-            {/* Intro Content */}
-            {activeTab === 'intro' && (
-              <div className="space-y-6">
-                <div className="flex items-start gap-6">
-                  {productDesignContent.logo ? (
-                    <img
-                      src={productDesignContent.logo}
-                      alt="Product logo"
-                      className="w-16 h-16 object-contain rounded-xl border border-gray-200"
-                    />
-                  ) : (
-                    <div className="w-16 h-16 rounded-xl border border-gray-200 bg-gray-50" />
-                  )}
-                  <div>
-                    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{productDesignContent.title || 'Product Designs'}</h1>
-                    <p className="mt-2 text-gray-600 text-sm">By {personalInfo.displayName}</p>
-                  </div>
-                </div>
-
-                <div className="prose prose-neutral max-w-none">
-                  <p className="text-lg leading-8 text-gray-700">{productDesignContent.description}</p>
-                </div>
-
-                {productDesignContent.highlights && productDesignContent.highlights.length > 0 && (
-                  <ul className="grid sm:grid-cols-2 gap-3 mt-2">
-                    {productDesignContent.highlights.map((point, idx) => (
-                      <li key={idx} className="text-gray-700 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-
-                {productDesignContent.mockupUrl && (
-                  <div>
-                    <button
-                      onClick={openMockup}
-                      className="mt-2 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
-                    >
-                      View Mock-up
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 5h6v6h-2V8.41l-6.29 6.3-1.42-1.42L15.59 7H13V5Z"/></svg>
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Mockup inline embed */}
-            {activeTab === 'mockup' && (
-              <div className="space-y-4">
-                <div className="rounded-2xl border border-gray-200 bg-white/80 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)] overflow-hidden">
-                  <div className="relative">
-                    {isIframeLoading && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-white">
-                        <div className="h-8 w-8 rounded-full border-2 border-gray-300 border-t-gray-900 animate-spin" aria-label="Loading" />
-                      </div>
-                    )}
-                    {productDesignContent.mockupUrl && shouldMountIframe ? (
-                      <iframe
-                        src={productDesignContent.mockupUrl}
-                        title="Mockup Preview"
-                        className="w-full h-[70vh] sm:h-[80vh]"
-                        loading="lazy"
-                        onLoad={() => setIsIframeLoading(false)}
-                      />
-                    ) : !productDesignContent.mockupUrl ? (
-                      <div className="w-full h-[60vh] flex items-center justify-center text-gray-500">No mock-up URL configured</div>
+        <div className="pt-24 pb-16">
+          <h1 className="text-3xl sm:text-4xl font-bold text-blue-900 mb-8 text-center">Product Designs</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+            {/* SheSaves Card */}
+            <div className={`bg-white border border-blue-100 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center cursor-pointer ${openCard === 'shesaves' ? 'ring-2 ring-blue-500' : ''}`} onClick={() => setOpenCard(openCard === 'shesaves' ? null : 'shesaves')}>
+              <span className="mb-3">
+                <svg width="40" height="40" fill="none" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#E0F2FE"/><path d="M16 10a6 6 0 0 1 6 6v4a6 6 0 0 1-12 0v-4a6 6 0 0 1 6-6Z" stroke="#2563EB" strokeWidth="2"/><path d="M16 14v4" stroke="#2563EB" strokeWidth="2" strokeLinecap="round"/></svg>
+              </span>
+              <h2 className="text-xl font-bold text-blue-900 mb-2">SheSaves</h2>
+              {openCard === 'shesaves' && (
+                <div className="w-full mt-4 text-left">
+                  <div className="flex items-center gap-3 mb-3">
+                    {productDesignContent.logo ? (
+                      <img src={productDesignContent.logo} alt="SheSaves logo" className="w-12 h-12 object-contain rounded-xl border border-gray-200" />
                     ) : (
-                      <div className="w-full h-[60vh] flex items-center justify-center">
-                        <button
-                          onClick={() => setShouldMountIframe(true)}
-                          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
-                          aria-label="Load prototype"
-                        >
-                          Load prototype
-                        </button>
-                      </div>
+                      <div className="w-12 h-12 rounded-xl border border-gray-200 bg-gray-50" />
                     )}
+                    <div>
+                      <p className="text-gray-600 text-sm">By {personalInfo.displayName}</p>
+                    </div>
                   </div>
-                </div>
-
-                {productDesignContent.mockupUrl && (
-                  <div className="flex items-center justify-end">
-                    <a
-                      href={productDesignContent.mockupUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-900 text-sm font-medium hover:bg-gray-50 transition-colors"
-                    >
-                      Open in new tab
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13 5h6v6h-2V8.41l-6.29 6.3-1.42-1.42L15.59 7H13V5Z"/></svg>
-                    </a>
+                  <div className="prose prose-neutral max-w-none mb-4">
+                    <p className="text-base leading-relaxed text-gray-700">{productDesignContent.description}</p>
                   </div>
-                )}
-              </div>
-            )}
-
-            {/* Modal for mockup (optional, not auto-open) */}
-            {isModalOpen && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center">
-                <div className="absolute inset-0 bg-black/50" onClick={closeModal} />
-                <div className="relative bg-white rounded-xl shadow-2xl w-[95vw] h-[80vh] max-w-5xl overflow-hidden">
-                  <button
-                    onClick={closeModal}
-                    className="absolute top-3 right-3 z-10 px-3 py-1.5 rounded-md bg-gray-900 text-white text-xs hover:bg-gray-800"
-                  >
-                    Close
-                  </button>
-                  {productDesignContent.mockupUrl ? (
-                    <iframe
-                      src={productDesignContent.mockupUrl}
-                      title="Mockup Preview"
-                      className="w-full h-full"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-500">No mock-up available</div>
+                  {productDesignContent.mockupUrl && (
+                    <a href={productDesignContent.mockupUrl} target="_blank" rel="noopener noreferrer" className="inline-block mt-2 px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors">View Mock-up</a>
                   )}
                 </div>
-              </div>
-            )}
-          </section>
+              )}
+            </div>
+            {/* HealHub Card */}
+            <div className={`bg-white border border-blue-100 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col items-center cursor-pointer ${openCard === 'healhub' ? 'ring-2 ring-blue-500' : ''}`} onClick={() => setOpenCard(openCard === 'healhub' ? null : 'healhub')}>
+              <span className="mb-3">
+                <svg width="40" height="40" fill="none" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#FEE2E2"/><path d="M16 11v10M11 16h10" stroke="#DC2626" strokeWidth="2" strokeLinecap="round"/></svg>
+              </span>
+              <h2 className="text-xl font-bold text-blue-900 mb-2">HealHub</h2>
+              {openCard === 'healhub' && (
+                <div className="w-full mt-4">
+                  {renderHealHubContent()}
+                  <div className="text-center mt-4">
+                    <button className="inline-block px-4 py-2 rounded-lg bg-gray-200 text-gray-500 text-sm font-medium cursor-not-allowed" disabled>View Mock-up</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-
         {/* CTA Section */}
-        <div className="mb-16">
-          <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.2)]">
+        <div className="my-16">
+          <div className="rounded-2xl border border-gray-200 bg-gradient-to-br from-white to-gray-50 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
             <div>
-              <p className="text-base sm:text-lg font-semibold tracking-tight text-gray-900">Want to see full document</p>
+              <p className="text-lg font-semibold tracking-tight text-gray-900">Want to see the full document?</p>
               <p className="text-sm text-gray-600 mt-1">Request access to the complete product brief and assets.</p>
             </div>
             <a
