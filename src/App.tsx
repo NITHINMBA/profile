@@ -3,6 +3,9 @@ import { Navigation } from './components/Navigation';
 import { Home } from './components/Home';
 import { Projects } from './components/Projects';
 import { ProductDesigns } from './components/ProductDesigns';
+import ResearchWorks from './components/ResearchWorks';
+import LinkedinPage from './components/LinkedinPage';
+import FlipkartPage from './components/FlipkartPage';
 import { AboutMe } from './components/AboutMe';
 import { Footer } from './components/Footer';
 
@@ -22,35 +25,36 @@ function App() {
     setActiveSection(section);
   };
 
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'home':
+        return <Home />;
+      case 'projects':
+        return <Projects />;
+      case 'product-designs':
+        return <ProductDesigns />;
+      case 'research-works':
+        return <ResearchWorks />;
+      case 'linkedin':
+        return <LinkedinPage />;
+      case 'flipkart':
+        return <FlipkartPage />;
+      case 'about':
+        return <AboutMe />;
+      default:
+        return <Home />;
+    }
+  };
+
   return (
-    <div className={`${activeSection === 'home' ? 'full-height overflow-hidden' : 'min-h-screen'} bg-white text-blue-900 transition-colors duration-300`}>
+    <div className="bg-white text-blue-900">
       <Navigation 
         activeSection={activeSection}
         onNavigate={handleNavigate}
       />
-      
-      {activeSection === 'home' ? (
-        <div className="h-full flex flex-col">
-          <Home />
-        </div>
-      ) : (
-        <main className="pt-24">
-          {activeSection === 'projects' && <Projects />}
-          {activeSection === 'product-designs' && (
-            <ProductDesigns />
-          )}
-          {activeSection === 'research-works' && (
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="text-center">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">Research Works</h1>
-                <p className="text-gray-600">Coming soon...</p>
-              </div>
-            </div>
-          )}
-          {activeSection === 'about' && <AboutMe />}
-        </main>
-      )}
-      
+      <div className="pt-20">
+        {renderContent()}
+      </div>
       {activeSection !== 'home' && <Footer />}
     </div>
   );
